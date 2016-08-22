@@ -1,0 +1,47 @@
+
+    <div class="clearfix"></div>
+    <!-- content begin -->
+    <div id="content" class="no-padding">
+<!-- subheader begin -->
+        <section id="subheader" data-speed="2" data-type="background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1>{{'nav_sermon' | translate}}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+        <div class="clearfix"></div>
+
+        <!-- content begin -->
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="custom-col-3" ng-repeat="sermon in sermons | orderBy: '-date'">
+                            <div class="left-col">
+                                <img src="{{sermon.media.img}}" alt="" class="img-responsive">
+                            </div>
+                            <div class="mid-col">
+                                <a ng-click="watch(sermon)">
+                                    <h3>{{sermon.title[language.translator]}}</h3>
+                                </a>
+                               <!--  <div class="details"><span>By <a href="#">{{sermon.speaker[language.translator]}}</a>, {{sermon.displaydate}}</div> -->
+                                <div class="details">{{sermon.displaydate}}</div>
+                            </div>
+                            <div class="right-col">
+                                <a href="#"><i class="fa fa-video-camera"></i></a>
+                                <a href="#"><i class="fa fa-volume-up"></i></a>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i></a>
+                            </div>
+                        </div>
+   <!--                      <sermonitem title="{{sermon.title[language.translator]}}" speaker="{{sermon.speaker[language.translator]}}" date="{{sermon.date}}" thumbnail="{{sermon.media.img}}" link=""></sermonitem> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>

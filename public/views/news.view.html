@@ -1,0 +1,81 @@
+ <!-- subheader begin -->
+        <section id="subheader" data-speed="2" data-type="background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1>{{'nav_news' | translate}}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+        <div class="clearfix"></div>
+
+        <!-- content begin -->
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="blog-list">
+                            <li ng-repeat="news in allnews">
+                                <div class="info">
+                                    <div class="date-box">
+                                        <span class="day">{{news.day}}</span>
+                                        <span class="month">{{news.month}}</span>
+                                    </div>
+                                </div>
+                                <div class="preview">
+                                    <img src="img/lodc/main/prayer_{{language.translator}}.jpg" alt="" />
+                                    <a href="news-single.html">
+                                        <h3 class="blog-title">{{news.title[language.translator]}}'</h3>
+                                    </a>
+                                </div>
+                                <div class="meta-info">By: <a href="#">Admin</a><span>|</span><a href="#">Faith</a>, <a href="#">People</a><span>|</span><a href="#">2 Comments</a></div>
+                            </li>
+                        </ul>
+
+                        <div class="clearfix"></div>
+
+                        <div class="text-center ">
+                            <ul class="pagination">
+                                <li><a href="#">Prev</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="sidebar" class="col-md-4">
+
+                        <div class="widget latest_news">
+                            <h3>{{'latest_news' | translate}}</h3>
+                            <ul class="bloglist-small">
+                                <li ng-repeat="news in allnews | orderBy: '-date' | limitTo:3">
+                                    <div class="date-box">
+                                        <span class="day">{{news.day}}</span>
+                                        <span class="month">{{news.month}}</span>
+                                    </div>
+                                    <div class="txt">
+                                        <h5><a href="css/#">{{news.title[language.translator]}}</a></h5>
+                                        <div>
+                                            <div>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque </div>
+                                        </div>
+                                    </div>
+                                </li>
+        
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- content close -->

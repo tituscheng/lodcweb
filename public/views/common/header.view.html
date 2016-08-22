@@ -1,0 +1,78 @@
+<script>
+jQuery(document).ready(function() {
+    var $header = jQuery("header"),
+        $clone = $header.before($header.clone().addClass("clone"));
+    jQuery(window).on("scroll", function() {
+        var fromTop = jQuery(window).scrollTop();
+        console.log(fromTop);
+        jQuery("body").toggleClass("down", (fromTop > 240));
+        anim();
+    });
+});
+</script>
+
+<!--header begin -->
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <div class="inner">
+                                <a href="index.html">
+                                    <img src="img/lodc/main/lodc-logo-transparent.png" alt="" class="logo-1">
+                                    <span class="logo-2"><img src="img/lodc/main/lodc-logo-transparent.png" alt="" class="logo-2" "> {{'church_title' | translate}}</span>
+                                </a>
+                                <!-- <span class="logo-2" style="font-size:20px: color: black; line-height:40px;">{{'church_title' | translate}}</span> -->
+                                <span class="logo-1" style='font-size:17px; color: white;'>{{'church_title' | translate}}</span>
+                            </div>
+                        </div>
+                        <!-- logo close -->
+
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <!-- mainmenu begin -->
+                        <div id="mainmenu-container">
+                            <ul id="mainmenu">
+                                <li><a href="index.html">{{'nav_home' | translate}}</a>
+               <!--                      <ul>
+                                        <li><a href="index.html">Homepage 1</a></li>
+                                        <li><a href="index-2.html">Homepage 2</a></li>
+                                        <li><a href="index-3.html">Homepage 3</a></li>
+                                    </ul> -->
+                                </li>
+                                <li><a ui-sref="events">{{'nav_events' | translate }}</a>
+                           <!--          <ul>
+                                        <li><a href="events.html">List Type</a></li>
+                                        <li><a href="events-calendar.html">Calendar Type</a></li>
+                                    </ul> -->
+                                </li>
+                                <li><a ui-sref="sermon">{{'nav_sermon' | translate}}</a></li>
+                         <!--        <li><a href="features.html">Features</a></li> -->
+                                <li><a ui-sref="news">{{'nav_news' | translate}}</a></li>
+                          <!--       <li><a href="gallery.html">Gallery</a></li> -->
+                                <li><a ui-sref="contact">{{'nav_contact' | translate}}</a></li>
+                                <li><a ng-click="changeLanguage()">{{language.title}}</a><li>
+                            </ul>
+                        </div>
+                        <!-- mainmenu close -->
+
+                        <!-- social icons -->
+                        <div class="social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-rss"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-envelope-o"></i></a>
+                        </div>
+                        <!-- social icons close -->
+
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <!-- header close

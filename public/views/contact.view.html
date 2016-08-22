@@ -1,0 +1,100 @@
+subheader begin -->
+        <section id="subheader" data-speed="2" data-type="background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1>{{'nav_contact' | translate}}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+<!--         <div id="map"></div> -->
+
+        <!-- content begin -->
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="contact-form-wrapper">
+                            <div class="contact_form_holder">
+                                <form id="contact" class="row" name="form1" method="post" action="">
+
+
+
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="{{'contact_name_field' | translate}}" />
+
+                                    <div id="error_email" class="error">Please check your email</div>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="{{'contact_email_field' | translate}}" />
+
+                                    <div id="error_message" class="error">Please check your message</div>
+                                    <textarea cols="10" rows="10" name="message" id="message" class="form-control" placeholder="{{'contact_message_field' | translate}}"></textarea>
+
+                                    <div id="mail_success" class="success">Thank you. Your message has been sent.</div>
+                                    <div id="mail_failed" class="error">Error, email not sent</div>
+
+                                    <p id="btnsubmit">
+                                        <input type="submit" id="send" value="{{'send' | translate}}" class="btn btn-custom" />
+                                    </p>
+
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <div class="contact-info">
+
+                            <div class="social-icons">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-rss"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#"><i class="fa fa-envelope-o"></i></a>
+                            </div>
+
+                            <div class="divider-line"></div>
+
+                            <span class="title">{{'telephone' | translate}}:</span>
+                            (425)772-9946 / (425)499-7289
+						
+						<div class="divider-line"></div>
+
+                            <span class="title">{{'church_time' | translate}}:</span>
+                                             {{'sunday' | translate}}: {{churchtime.sunday[language.translator]}}<br>
+                            {{'wednesday_service' | translate}}: {{churchtime.wednesday[language.translator]}}<br>
+                            {{'saturday_service' | translate}}: {{churchtime.saturday[language.translator]}}<br>
+     <!--                        {{'sunday' | translate}}: {{'pm' | translate}} 1{{'hours' | translate}} 30{{'minutes' | translate}} to {{'pm' | translate}} 5{{'hours' | translate}} <br>
+                            {{'wednesday_service' | translate}}: {{'pm' | translate}} 7{{'hours' | translate}} 30{{'minutes' | translate}}<br>
+                            {{'saturday_service' | translate}}: {{'am' | translate}} 6{{'hours' | translate}} 30{{'minutes' | translate}}<br> -->
+
+                            <div class="divider-line"></div>
+
+                            <span class="title">{{'church_address' | translate}}:</span>
+                            343 15th Avenue, Kirkland, WA 98033
+                            <br>
+
+                            <span class="title">{{"wednesday_service" | translate}}</span>
+                            {{'wednesday_service_location' | translate}}
+                            <div>{{'nu_address' | translate}}</div>
+                            
+
+                    <!--         <span class="title">{{'address' | translate}}:</span>
+                            343 15th Avenue, Kirkland, WA 98033
+
+                        *수요 예배는 커클랜드에 위치한 Northwest University 도서관 1층 H-110 강의실에서 드립니다.
+                        **Northwest University 주소: 5520 108th Ave NE, Kirkland, WA 98033 -->
+
+						
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content close
