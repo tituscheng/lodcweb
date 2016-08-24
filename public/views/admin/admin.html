@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="adminApp">
+
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="admin.js"></script>
+  </head>
+
+  <body ng-controller="SermonTranslationDistributeController">
+    <div class="container" style="margin-top:50px;">
+      <div class="form-group" align="left">
+        <label>
+      Sermon Day: 
+                <input type="date" class="form-control" />
+        </label>
+      </div>
+      <div class="form-group" align="left">
+        <label>
+      Assignee: 김태령
+                <textarea ng-model="part2" rows="6" cols="50" class="form-control" placeholder="Message Part 1"></textarea>
+        </label>
+      </div>
+      <div class="form-group" align="left">
+        <label>
+      
+      Assignee: 건호
+                <textarea rows="6" cols="50" class="form-control" placeholder="Message Part 2"></textarea>
+        </label>
+      </div>
+      <div class="form-group" align="left">
+        <label>
+      
+      Assignee: Paul Sue
+                <textarea rows="6" cols="50" class="form-control" placeholder="Message Part 3"></textarea>
+        </label>
+      </div>
+      <button type="button" class="form-control" ng-click="test()">Test</button>
+    </div>
+  </body>
+
+</html>

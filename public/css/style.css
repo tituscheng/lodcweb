@@ -630,13 +630,14 @@ display:table-cell;
 vertical-align:middle;
 }
 .event-item .left-col{
-width:60%;
+/*width:60%;*/
 }
 .event-item .right-col{
-width:40%;
+width:80%;
 padding:20px;
 color:#fff;
 background:#8ec92f;
+
 }
 .event-item .right-col .date{
 font-size:72px;
