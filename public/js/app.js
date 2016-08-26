@@ -2,7 +2,7 @@ var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSan
 
 lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvider, $urlRouterProvider) {
   var newBaseUrl = "http://default-environment.tdtddkdkmp.us-west-2.elasticbeanstalk.com/api/api";
-  newBaseUrl = "http://localhost:3000/api/api";
+ // newBaseUrl = "http://localhost:3000/api/api";
   RestangularProvider.setBaseUrl(newBaseUrl);
 
   $translateProvider.preferredLanguage("en");
