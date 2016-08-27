@@ -79,7 +79,7 @@ lodcWebApp.controller("MainSliderController", function($scope) {
       },
       link: "events"
     }
-  }
+  };
 
 });
 
@@ -194,12 +194,9 @@ lodcWebApp.controller("EventsController", function($scope, EventService) {
   EventService.Get(function(response) {
     response.forEach(function(event){
 
-      //Time zone handling
-      var zone = "US/Pacific";
-      moment.tz.add('America/Los_Angeles|PST PDT|80 70|01010101010|1Lzm0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0');
-      moment.tz.link("US/Pacific");
-      var enddate = moment.tz(event.enddate, zone);
-      var startdate = moment.tz(event.startdate, zone);
+      //Handling time zone difference
+      var enddate = moment(event.enddate).add('hours', 7);
+      var startdate = moment(event.startdate).add('hours', 7);
       event.month = startdate.format("MMM");
       if(enddate.format("D") == startdate.format("D")) {
         event.day = startdate.format("DD");
@@ -208,7 +205,7 @@ lodcWebApp.controller("EventsController", function($scope, EventService) {
       }
       event.hour = startdate.format("h:mm A");
 
-      //detail handling
+      // //detail handling
       event.content.en = event.content.en.replace(/;/g, "<br>");
       event.content.kr = event.content.kr.replace(/;/g, "<br>");
     });
