@@ -48,6 +48,38 @@ lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvid
 });
 
 lodcWebApp.controller("MainSliderController", function($scope) {
+  $scope.sliderContent = {
+    main1: {
+      title: {
+        en: "Labor Day Weekend",
+        kr: "노동일"
+      },
+      subtitle: {
+        en: "Church Retreat",
+        kr: "교회인 수련회"
+      },
+      content: {
+        en: "Come join us in a two day retreat worshipping God",
+        kr: "이틀 수련회에 함께 하나님을 경배합시다"
+      },
+      link: "events"
+    },
+    main2: {
+      title: {
+        en: "This Saturday",
+        kr: "이번 토요일"
+      },
+      subtitle: {
+        en: "Picnic at Lutheran Burbank Park",
+        kr: "루터 버 뱅크 파크에 있는 야유회"
+      },
+      content: {
+        en: "Fun and fellowship time",
+        kr: "재미 있고 단체 시간"
+      },
+      link: "events"
+    }
+  }
 
 });
 
@@ -140,6 +172,7 @@ lodcWebApp.directive("mainslider", function() {
   console.log("mainslider called");
   return {
     templateUrl: "/views/main_slider.html",
+    controller: "MainSliderController",
     link: function(scope, elem, sttrs) {
       elem.find('#revolution-slider').revolution({
         delay: 15000,
@@ -152,7 +185,6 @@ lodcWebApp.directive("mainslider", function() {
         touchenabled: "on",
         navigationType: "none",
       });
-
     }
   };
 });
@@ -160,6 +192,26 @@ lodcWebApp.directive("mainslider", function() {
 lodcWebApp.controller("EventsController", function($scope, EventService) {
   console.log("EventsController called");
   EventService.Get(function(response) {
+    response.forEach(function(event){
+
+      //Time zone handling
+      var zone = "US/Pacific";
+      moment.tz.add('America/Los_Angeles|PST PDT|80 70|01010101010|1Lzm0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0');
+      moment.tz.link("US/Pacific");
+      var enddate = moment.tz(event.enddate, zone);
+      var startdate = moment.tz(event.startdate, zone);
+      event.month = startdate.format("MMM");
+      if(enddate.format("D") == startdate.format("D")) {
+        event.day = startdate.format("DD");
+      } else {
+        event.day = startdate.format("D") + "-" + enddate.format("D");
+      }
+      event.hour = startdate.format("h:mm A");
+
+      //detail handling
+      event.content.en = event.content.en.replace(/;/g, "<br>");
+      event.content.kr = event.content.kr.replace(/;/g, "<br>");
+    });
     $scope.events = response;
   });
 })

@@ -8,22 +8,6 @@
             </div>
 
             <div class="col-md-10 col-md-offset-1">
-<!--                             <div class="custom-col-3 wow flipInX">
-                    <div class="left-col">
-                        <img src="img/sermons/pic%20(1).jpg" alt="" class="img-responsive">
-                    </div>
-                    <div class="mid-col">
-                        <a href="#">
-                            <h3>Transforming Live, Restoring Hope</h3>
-                        </a>
-                        <div class="details"><span>By <a href="#">John Rook</a>, February 08, 2015</span></div>
-                    </div>
-                    <div class="right-col">
-                        <a href="#"><i class="fa fa-video-camera"></i></a>
-                        <a href="#"><i class="fa fa-volume-up"></i></a>
-                        <a href="#"><i class="fa fa-file-pdf-o"></i></a>
-                    </div>
-                    <div class="col-md-10 col-md-offset-1"> -->
                  <div class="col-md-10 col-md-offset-1">
                     <div class="custom-col-3 wow flipInx" ng-repeat="recentsermon in recentsermons | orderBy:'-date'">
                         <div class="left-col">
@@ -37,8 +21,6 @@
                         </div>
                         <div class="right-col">
                             <a ng-click="watch(recentsermon)"><i class="fa fa-video-camera"></i></a>
-<!--                             <a href="#"><i class="fa fa-volume-up"></i></a>
-                            <a href="#"><i class="fa fa-file-pdf-o"></i></a> -->
                         </div>
                     </div>
                 </div>

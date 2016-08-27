@@ -1,46 +1,38 @@
-<!-- subheader begin --> 
-        <section id="subheader" data-speed="2" data-type="background">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>{{'nav_events' | translate}}</h1>
-                    </div>
-                </div>
+<!-- subheader begin -->
+<section id="subheader" data-speed="2" data-type="background">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{'nav_events' | translate}}</h1>
             </div>
-        </section>
-        <!-- subheader close -->
-
-        <div class="clearfix"></div>
-
-        <!-- content begin -->
-        <div id="content">
-
-            <div class="container">
-                <div class="row">
-                    <!-- event item begin -->
-                    <div class="col-md-6 event-item" ng-repeat="event in events">
-                        <div class="inner" style="height:100px;">
-<!--                             <div class="left-col">
-                                <img src="img/lodc/main/events_{{language.translator}}.jpg" alt="">
-                            </div>
-                            <div class="right-col">
-                                <span class="month">FEB</span>
-                                <span class="date">06</span>
-                                <span class="time">08:00 am</span>
-                            </div> -->
-                        </div>
-                        <div class="desc">
-                            <a href="#">
-                                <h3>{{event.title[language.translator]}}</h3>
-                            </a>
-                            <span class="text">{{event.content[language.translator]}}
-                            </span>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
         </div>
-        <!-- content close
+    </div>
+</section>
+<!-- subheader close -->
+<div class="clearfix"></div>
+<!-- content begin -->
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <!-- event item begin -->
+            <div class="col-md-6 event-item" ng-repeat="event in events">
+
+                <div style="display:flex; background:#fff; text-align:center; width:80%; height:160px;">
+                    <div style="background-color:#8ec92f; color:#ffffff; float: left; padding: 20px; width:30%">
+                        <span style="display:block; margin-top:15px; font-size:16px; letter-spacing: 5px;">{{event.month}}</span>
+                        <span style="display:block; font-size:36px; font-weight:800px; line-height:35px;">{{event.day}}</span>
+                        <span style="display:block; margin-top:3px;">{{event.hour}}</span>
+                    </div>
+                    <!-- class=desc -->
+                    <div style="padding: 10px 25px 25px 25px; display: block; border-bottom: solid 2px #eee; background-color:#f2f2f2; width:100%">
+                        <a href="#">
+                            <h3>{{event.title[language.translator]}}</h3>
+                        </a>
+                        <span class="text" ng-bind-html="event.content[language.translator]"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content close
