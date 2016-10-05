@@ -26,9 +26,6 @@
 
         function GetMostRecent(callback) {
             service.one("recent").get().then(function(sermons){
-                for(var i = 0; i < sermons.length; i++) {
-                    processDate(sermons[i]);
-                }
                 callback(sermons);
             })
         }

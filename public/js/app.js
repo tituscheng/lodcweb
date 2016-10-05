@@ -1,8 +1,8 @@
-var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSanitize', 'pascalprecht.translate', 'restangular', 'base64']);
+var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSanitize', 'pascalprecht.translate', 'restangular', 'base64', 'uiGmapgoogle-maps']);
 
 lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvider, $urlRouterProvider) {
-  var newBaseUrl = "http://default-environment.tdtddkdkmp.us-west-2.elasticbeanstalk.com/api/api";
- // newBaseUrl = "http://localhost:3000/api/api";
+  //var newBaseUrl = "http://default-environment.tdtddkdkmp.us-west-2.elasticbeanstalk.com/api/api";
+  newBaseUrl = "http://localhost:3000/api/api";
   RestangularProvider.setBaseUrl(newBaseUrl);
 
   $translateProvider.preferredLanguage("en");
@@ -43,6 +43,14 @@ lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvid
   }).state('intro', {
     url: "/intro",
     templateUrl: "views/introduction.view.html"
+  }).state('gallery', {
+    url: "/gallery",
+    templateUrl: "views/gallery.view.html",
+    controller: "GalleryController"
+  }).state('album', {
+    url: "/album",
+    templateUrl: "views/album.view.html",
+    controller: "AlbumController"
   });
 
 });
@@ -109,18 +117,27 @@ lodcWebApp.controller("ContactController", function($scope, $base64, $http, Emai
     }
   };
 
-  $scope.sendEmail = function(){
-  	var param = {
-  		to:$scope.email,
-  		name:$scope.name,
-  		contactemail:$scope.email,
-  		message:$scope.message
-  	};
-		EmailService.Email(param, function(response) {
-			if(response.success) {
-				alert(response.message);
-			}
-		});
+  $scope.map = {
+    center: {
+      latitude: 56.162939,
+      longitude: 10.203921
+    },
+    zoom: 8
+  };
+
+
+  $scope.sendEmail = function() {
+    var param = {
+      to: $scope.email,
+      name: $scope.name,
+      contactemail: $scope.email,
+      message: $scope.message
+    };
+    EmailService.Email(param, function(response) {
+      if(response.success) {
+        alert(response.message);
+      }
+    });
   }
 
 
@@ -192,7 +209,7 @@ lodcWebApp.directive("mainslider", function() {
 lodcWebApp.controller("EventsController", function($scope, EventService) {
   console.log("EventsController called");
   EventService.Get(function(response) {
-    response.forEach(function(event){
+    response.forEach(function(event) {
 
       //Handling time zone difference
       var enddate = moment(event.enddate).add('hours', 7);
@@ -228,6 +245,98 @@ lodcWebApp.controller("MainEventsController", function($scope) {
     description: "event_saturday_description"
   }];
 
+});
+
+lodcWebApp.controller("GalleryController", function($scope, $rootScope, $state, AlbumService) {
+
+  AlbumService.GetAlbumsByYear({ year: 2016 }, function(results) {
+    $scope.albums = results;
+  });
+
+  $scope.selectAlbum = function(album_id) {
+    console.log(album_id);
+    $rootScope.selectedAlbum = album_id;
+    $state.go("album");
+  }
+});
+
+lodcWebApp.controller("AlbumController", function($scope, $state, $window, $rootScope, AlbumService) {
+  $scope.isLoading = true;
+  angular.element('#preloader').delay(500).fadeOut(500);
+  if(!$rootScope.selectedAlbum) {
+    $state.go("gallery");
+  } else {
+    function scaleGallery() {
+      // This is roughly the max pixels width/height of a square photo
+      var widthSetting = 400;
+
+      // Do not edit any of this unless you know what you're doing
+      var containerWidth = angular.element(".gallery").width();
+      // console.log("Container width: " + containerWidth); 
+      var ratioSumMax = containerWidth / widthSetting;
+      var imgs = angular.element(".gallery").children();
+      console.log(imgs);
+      var numPhotos = imgs.length,
+        ratioSum, ratio, photo, row, rowPadding, i = 0;
+      console.log("Number of photos: " + numPhotos);
+
+      while(i < numPhotos) {
+        ratioSum = rowPadding = 0;
+        row = new Array();
+        while(i < numPhotos && ratioSum < ratioSumMax) {
+          photo = angular.element(imgs[i]);
+          // reset width to original
+          photo.width("");
+          ratio = photo.width() / photo.height();
+          rowPadding += getHorizontalPadding(photo);
+          // if this is going to be first in the row, clear: left
+          if(ratioSum == 0) photo.css("clear", "left");
+          else photo.css("clear", "none");
+          ratioSum += ratio;
+          row.push(photo);
+          i++;
+          // if only 1 image left, squeeze it in
+          if(i == numPhotos - 1) ratioSumMax = 999;
+        }
+        unitWidth = (containerWidth - rowPadding) / ratioSum;
+
+        row.forEach(function(elem) {
+          elem.width(unitWidth * elem.width() / elem.height());
+        });
+        $scope.isLoading = false;
+      }
+    }
+
+    function getHorizontalPadding(elem) {
+      var padding = 0;
+      var left = elem.css("padding-left");
+      var right = elem.css("padding-right");
+      padding += parseInt(left ? left.replace("px", "") : 0);
+      padding += parseInt(right ? right.replace("px", "") : 0);
+      return padding;
+    }
+
+    AlbumService.GetAlbumByID({ album_id: $rootScope.selectedAlbum }, function(result) {
+      if(result.status) {
+        $scope.photos = result.data;
+        $scope.album_title = result.title;
+        scaleGallery();
+      }
+      console.log(result);
+    })
+
+    var count = 0;
+    $scope.countImage = function() {
+      count++
+      if(count === $scope.photos.length) {
+        count = 0;
+        console.log("Finished Loading all images");
+        scaleGallery();
+      } 
+      // console.log("$scope.photos.length " + typeof $scope.photos.length);
+      // console.log('Count image called with count ' + typeof count);
+    }
+  }
 });
 
 lodcWebApp.controller("MainNavigationController", function($scope, $translate) {
@@ -296,8 +405,10 @@ lodcWebApp.controller("LatestSermonController", function($scope, SermonService, 
     for(var i = 0; i < response.length; i++) {
       var sermon = response[i];
       sermon.media.img = youtubeimage(sermon.media.youtube)
+      sermon.displaydate = moment(sermon.date).add('hours', 7).format('ll');
     }
     $scope.recentsermons = response;
+    console.log($scope.recentsermons);
   });
 
   $scope.watch = function(sermon) {
@@ -375,11 +486,23 @@ lodcWebApp.directive("preloader", function() {
   }
 })
 
+lodcWebApp.directive('imageonload', function(){
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      element.bind('load', function() {
+          //call the function that was passed
+          scope.$apply(attrs.imageonload);
+      });
+    }
+  }
+});
+
 // lodcWebApp.directive("sermonview", function() {
-// 	console.log("sermonview called");
-// 	return {
-// 		templateUrl: 'views/sermon.view.html'
-// 	}
+//  console.log("sermonview called");
+//  return {
+//    templateUrl: 'views/sermon.view.html'
+//  }
 // })
 
 lodcWebApp.directive("footerview", function() {
@@ -401,5 +524,30 @@ lodcWebApp.directive("sermonitem", function() {
       link: '=link'
     }
 
+  }
+});
+
+
+lodcWebApp.directive('runGallery', function() {
+  return {
+    restrict: "A",
+    link: function(scope, elem, attrs) {
+      Galleria.loadTheme('js/lib/galleria/themes/classic/galleria.classic.min.js');
+      Galleria.run('#gallery-isotope');
+    }
+  }
+});
+
+lodcWebApp.directive('map', function() {
+  return {
+    restrict: "E",
+    template: "<div id='map'></div>",
+    link: function(scope, elem, attrs) {
+      console.log(elem);
+      var map = new google.maps.Map(elem.find('#map'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8
+      });
+    }
   }
 })

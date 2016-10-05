@@ -1,0 +1,44 @@
+
+        <!-- subheader begin -->
+        <section id="subheader" data-speed="2" data-type="background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1>Our Gallery</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+        <div class="clearfix"></div>
+
+        <!-- content begin -->
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul id="filters">
+                            <li><a href="#" data-filter="*" class="selected">show all</a></li>
+                            <li><a href="#" data-filter=".event">event</a></li>
+                            <li><a href="#" data-filter=".news">news</a></li>
+                            <li><a href="#" data-filter=".gallery">gallery</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="album-title">
+                    {{album_title}}
+                    </div>
+                    <div id="preloader" ng-show="isLoading">
+                    </div>
+                    <div class="gallery" photo-gallery>
+                        <img src="{{photo.url}}" ng-repeat="photo in photos" imageonload="countImage()">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- content close -->

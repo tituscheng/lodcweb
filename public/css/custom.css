@@ -1,0 +1,33 @@
+.galleria {
+	width: 900px; 
+	height: 500px;
+	background: #000
+}
+
+.album-year {
+	font-family:Arial; font-size:16px
+}
+
+.album {
+	width:80%;
+}
+
+.album-title {
+	font-size: 20px;
+	padding-bottom: 5px;
+}
+
+.album-intro-canvas {
+	width:400px !important;
+	height:300px !important;
+}
+
+.gallery img{
+	float: left;
+	padding: 0 2px 2px 0;
+}
+
+.upcoming-events-image {
+	width:407px !important;
+	height:305px !important;
+}

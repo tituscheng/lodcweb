@@ -1,0 +1,47 @@
+
+        <!-- subheader begin -->
+        <section id="subheader" data-speed="2" data-type="background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1>{{'gallery' | translate}}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+        <div class="clearfix"></div>
+
+        <!-- content begin -->
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul id="filters">
+                            <li><a href="#" data-filter="*" class="selected">show all</a></li>
+                            <li><a href="#" data-filter=".event">event</a></li>
+                            <li><a href="#" data-filter=".news">news</a></li>
+                            <li><a href="#" data-filter=".gallery">gallery</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="gallery-isotope" class="col-md-12">
+                        <div class="col-md-12">Album</div>
+                        <div class="col-md-2 album-year">2016</div>
+                        <div class="col-md-10" class="album">
+                            <div ng-repeat="album in albums">
+                                <div class="album-title">{{album.title}}</div>
+                                <div>
+                                    <img src="{{album.url}}" class="album-intro-canvas" ng-click="selectAlbum(album.id)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <!-- content close -->
