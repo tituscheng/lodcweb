@@ -22,6 +22,29 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
+                        <div class="testimony-title">
+                            {{'testimony' | translate}}
+                        </div>
+                        <div class="custom-col-3" ng-repeat="sermon in sermons | orderBy: '-date'">
+                            <div class="left-col">
+                                <img src="{{sermon.media.img}}" alt="" class="img-responsive">
+                            </div>
+                            <div class="mid-col">
+                                <a ng-click="watch(sermon)">
+                                    <h3>{{sermon.title[language.translator]}}</h3>
+                                </a>
+                               <!--  <div class="details"><span>By <a href="#">{{sermon.speaker[language.translator]}}</a>, {{sermon.displaydate}}</div> -->
+                                <div class="details">{{sermon.displaydate}}</div>
+                            </div>
+                            <div class="right-col">
+                                <a ng-click="watch(sermon)"><i class="fa fa-video-camera"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="custom-col-3" ng-repeat="sermon in sermons | orderBy: '-date'">
                             <div class="left-col">
                                 <img src="{{sermon.media.img}}" alt="" class="img-responsive">

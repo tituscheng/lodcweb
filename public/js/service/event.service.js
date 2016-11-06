@@ -18,6 +18,13 @@
             })
         }
 
+        function GetLatest(callback) {
+            service.one('latest').get().then(function(events){
+                var latestevents = events.data;
+                callback(latestevents);
+            })
+        }
+
         function setSermon(theSermon) {
             selectedSermon = theSermon;
         }
@@ -28,6 +35,7 @@
 
         // service.GetMostRecent = GetMostRecent;
         service.Get = Get;
+        service.GetLatest = GetLatest;
         service.setSermon = setSermon;
         service.getSermon = getSermon;
         // service.GetDetail = GetDetail;

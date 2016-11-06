@@ -1,4 +1,5 @@
 {
+	"testimony": "Testimony",
 	"gallery": "Gallery",
 	"prayer_request": "Prayer request",
 	"upcoming_events": "Favorate Events",
@@ -58,6 +59,8 @@
 	"hours": "HOURS",
 	"minutes": "MINUTES",
 	"seconds": "SECONDS",
+	"upcoming": "Upcoming",
+	"events": "EVENTS",
 	"latest_news":"LATEST NEWS",
 	"church_address": "Church Location",
 	"wednesday_service":"Wednesday",

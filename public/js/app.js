@@ -1,8 +1,8 @@
-var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSanitize', 'pascalprecht.translate', 'restangular', 'base64', 'uiGmapgoogle-maps']);
+var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSanitize', 'pascalprecht.translate', 'restangular', 'base64', 'uiGmapgoogle-maps', 'ocNgRepeat']);
 
 lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvider, $urlRouterProvider) {
   var newBaseUrl = "http://default-environment.tdtddkdkmp.us-west-2.elasticbeanstalk.com/api/api";
-  // newBaseUrl = "http://localhost:3000/api/api";
+ // newBaseUrl = "http://localhost:3000/api/api";
   RestangularProvider.setBaseUrl(newBaseUrl);
 
   $translateProvider.preferredLanguage("en");
@@ -59,31 +59,31 @@ lodcWebApp.controller("MainSliderController", function($scope) {
   $scope.sliderContent = {
     main1: {
       title: {
-        en: "Labor Day Weekend",
-        kr: "노동일"
+        en: "11/13 Sunday",
+        kr: "11/13 주일"
       },
       subtitle: {
-        en: "Church Retreat",
-        kr: "교회인 수련회"
+        en: "Baptism and Communion",
+        kr: "세례와 성찬"
       },
       content: {
-        en: "Come join us in a two day retreat worshipping God",
-        kr: "이틀 수련회에 함께 하나님을 경배합시다"
+        en: "Come and witness the baptism of our brothers and sister",
+        kr: "우리 형제들과 자매의 세례식에 증인으로 참여합시다"
       },
       link: "events"
     },
     main2: {
       title: {
-        en: "This Saturday",
-        kr: "이번 토요일"
+        en: "1:00pm 11/25 Friday",
+        kr: "오후 1시 11/25 금요일"
       },
       subtitle: {
-        en: "Picnic at Lutheran Burbank Park",
-        kr: "루터 버 뱅크 파크에 있는 야유회"
+        en: "Housewarming Service & Party",
+        kr: "이사 예배"
       },
       content: {
-        en: "Fun and fellowship time",
-        kr: "재미 있고 단체 시간"
+        en: "",
+        kr: ""
       },
       link: "events"
     }
@@ -143,32 +143,32 @@ lodcWebApp.controller("ContactController", function($scope, $base64, $http, Emai
 
 })
 
-lodcWebApp.controller("SermonListController", function($scope, SermonService, $state) {
-  function youtubeimage(url) {
-    return url.replace("https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") + "/0.jpg";
-  }
+// lodcWebApp.controller("SermonListController", function($scope, SermonService, $state) {
+//   function youtubeimage(url) {
+//     return url.replace("https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") + "/0.jpg";
+//   }
 
-  SermonService.Get(function(response) {
-    for(var i = 0; i < response.length; i++) {
-      var sermon = response[i];
-      sermon.media.img = youtubeimage(sermon.media.youtube);
-    }
-    $scope.sermons = response;
-  });
+//   SermonService.Get(function(response) {
+//     for(var i = 0; i < response.length; i++) {
+//       var sermon = response[i];
+//       sermon.media.img = youtubeimage(sermon.media.youtube);
+//     }
+//     $scope.sermons = response;
+//   });
 
-  $scope.shouldDisplayVideo = false;
+//   $scope.shouldDisplayVideo = false;
 
-  $scope.select = function(chosenSermon) {
-    $scope.shouldDisplayVideo = true;
-    SermonService.setSermon(chosenSermon);
-  }
+//   $scope.select = function(chosenSermon) {
+//     $scope.shouldDisplayVideo = true;
+//     SermonService.setSermon(chosenSermon);
+//   }
 
-  $scope.watch = function(sermon) {
-    SermonService.setSermon(sermon);
-    $state.go("sermonvideo");
-  }
+//   $scope.watch = function(sermon) {
+//     SermonService.setSermon(sermon);
+//     $state.go("sermonvideo");
+//   }
 
-});
+// });
 
 lodcWebApp.controller("SermonVideoController", function($scope, SermonService, $sce, $state) {
   function embedlink(url) {
@@ -418,6 +418,40 @@ lodcWebApp.controller("LatestSermonController", function($scope, SermonService, 
 
 });
 
+lodcWebApp.controller("LatestEventController", function($scope, EventService) {
+  EventService.GetLatest(function(events) {
+    events.forEach(function(event){
+      var sDate = new Date(event.startdate);
+      event.displayDate = sDate.getDate() + " " + sDate.toLocaleString("en-us", {month: "long"})
+    })
+    $scope.latestevents = events;
+  });
+
+  $scope.getDay = function(eventDay) {
+    return eventDay.getDate();
+  }
+
+  $scope.getMonth = function(eventDay) {
+    return eventDay.toLocaleString("en-us", {month: "long"});
+  }
+
+  $scope.carouselInitializer = function() {
+    $(".custom-carousel-2").owlCarousel({
+      items: 3,
+      navigation: false,
+      pagination: false,
+     });
+  };
+})
+
+lodcWebApp.directive("latestblog", function(EventService) {
+  console.log("Latest blog called");
+  return {
+    templateUrl: "views/latestblog.view.html",
+    controller: "LatestEventController"
+  }
+})
+
 lodcWebApp.controller("MainCountDownController", function($scope) {
   $scope.nextsermonday = moment().add(1, 'weeks').startOf('week').format('MMMM Do YYYY') + " 1:30 pm";
 })
@@ -461,6 +495,7 @@ lodcWebApp.directive("latestsermon", function() {
     controller: 'LatestSermonController'
   }
 })
+
 
 lodcWebApp.directive("testimony", function() {
   console.log("testimony called");
