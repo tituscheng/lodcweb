@@ -1,0 +1,26 @@
+<section id="page-blog" class="no-padding">
+    <div class="fullwidth">
+        <div class="one-fourth text-center wow slideInLeft">
+            <div class="title-area">
+                <span>{{'upcoming' | translate}}</span>
+                <h1>{{'events' | translate}}</h1>
+            </div>
+        </div>
+        <div class="three-fourth">
+            <div class="custom-carousel-2">
+                <div class="item-blog" ng-repeat="event in latestevents" ng-repeat-owl-carousel carousel-init="carouselInitializer">
+                    <div class="inner">
+                        <span class="date">{{event.displayDate}}</span>
+                        <a href="#">
+                            <h3>{{event.title[language.translator]}}</h3>
+                        </a>
+                        <span class="desc">
+                            {{event.content[language.translator]}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</section>
