@@ -1,4 +1,6 @@
 {
+	"close": "닫기",
+	"testimony_baptism": "간증과 세례",
 	"testimony":"건증",
 	"gallery":"갤러리",
 	"prayer_request":"기도 제목은",
@@ -9,6 +11,7 @@
 	"nav_contact": "문의하기",
 	"nav_events": "행사 일정",
 	"nav_gallery": "사진",
+	"nav_special": "간증과 세례",
 	"mission_statement": "사명 선언문",
 	"next_sermon": "다음 설교 말씀",
 	"event_upcoming":"예배",

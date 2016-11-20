@@ -22,22 +22,41 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-<!--                         <div class="testimony-title">
-                            {{'testimony' | translate}}
-                        </div> -->
+                        <div class="custom-col-3">
+                            <div class="special-title">
+                                {{"testimony_baptism" | translate}} 
+                            </div>
+                            <div class="special-list">
+                                <div class="left-col special-video" ng-repeat="special in specials">
+                                    <div style="float:left;">
+                                        <img src="{{special.img}}" alt="" class="img-responsive" ng-click='open(special)'>
+                                    </div>
+                                    <div>
+                                        {{special.title[language.translator]}}
+                                    </div>
+                                </div>
+                                <div class="left-col">
+                                    <div style="width:100px; height:100px">
+                                        <img src="img/next.png" class="next-button" ng-click="next()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="special-title">
+                            {{"nav_sermon" | translate}}
+                        </div>
                         <div class="custom-col-3" ng-repeat="sermon in sermons | orderBy: '-date'">
                             <div class="left-col">
-                                <img src="{{sermon.media.img}}" alt="" class="img-responsive">
+                                <img src="{{sermon.media.img}}" alt="" class="img-responsive" ng-click="open(sermon)">
                             </div>
                             <div class="mid-col">
-                                <a ng-click="watch(sermon)">
+                                <a ng-click="open(sermon)">
                                     <h3>{{sermon.title[language.translator]}}</h3>
                                 </a>
-                               <!--  <div class="details"><span>By <a href="#">{{sermon.speaker[language.translator]}}</a>, {{sermon.displaydate}}</div> -->
                                 <div class="details">{{sermon.displaydate}}</div>
                             </div>
                             <div class="right-col">
-                                <a ng-click="watch(sermon)"><i class="fa fa-video-camera"></i></a>
+                                <a ng-click="open(sermon)"><i class="fa fa-video-camera"></i></a>
                             </div>
                         </div>
 
@@ -50,17 +69,15 @@
                                 <img src="{{sermon.media.img}}" alt="" class="img-responsive">
                             </div>
                             <div class="mid-col">
-                                <a ng-click="watch(sermon)">
+                                <a ng-click="open(sermon)">
                                     <h3>{{sermon.title[language.translator]}}</h3>
                                 </a>
-                               <!--  <div class="details"><span>By <a href="#">{{sermon.speaker[language.translator]}}</a>, {{sermon.displaydate}}</div> -->
                                 <div class="details">{{sermon.displaydate}}</div>
                             </div>
                             <div class="right-col">
-                                <a ng-click="watch(sermon)"><i class="fa fa-video-camera"></i></a>
+                                <a ng-click="open(sermon)"><i class="fa fa-video-camera"></i></a>
                             </div>
                         </div>
-   <!--                      <sermonitem title="{{sermon.title[language.translator]}}" speaker="{{sermon.speaker[language.translator]}}" date="{{sermon.date}}" thumbnail="{{sermon.media.img}}" link=""></sermonitem> -->
 
                     </div>
                 </div>

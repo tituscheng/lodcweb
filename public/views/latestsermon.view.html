@@ -11,16 +11,16 @@
                  <div class="col-md-10 col-md-offset-1">
                     <div class="custom-col-3 wow flipInx" ng-repeat="recentsermon in recentsermons | orderBy:'-date'">
                         <div class="left-col">
-                            <img src="{{recentsermon.media.img}}" class="img-responsive" alt="">
+                            <img src="{{recentsermon.media.img}}" class="img-responsive" alt="" ng-click="selectSermon(recentsermon)">
                         </div>
                         <div class="mid-col">
-                            <a ng-click="watch(recentsermon)">
+                            <a ng-click="selectSermon(recentsermon)">
                                 <h3>{{recentsermon.title[language.translator]}}</h3>
                             </a>
                             <div class="details"><span>{{recentsermon.displaydate}}</span></div>
                         </div>
                         <div class="right-col">
-                            <a ng-click="watch(recentsermon)"><i class="fa fa-video-camera"></i></a>
+                            <a ng-click="selectSermon(recentsermon)"><i class="fa fa-video-camera"></i></a>
                         </div>
                     </div>
                 </div>

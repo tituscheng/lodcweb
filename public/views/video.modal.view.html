@@ -1,0 +1,20 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" ng-click="close()">&times;</span></button>
+    <h4 class="modal-title center video-title">{{video.title[language.translator]}}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="video-container">
+      <youtube-video video-url="video.link" player-width="'100%'" player-height="'400px'">
+      </youtube-video>
+    </div>
+    <div>
+      <div class="video-scripture-text" ng-if="scripture.hasOwnProperty('book')">
+        Scripture: {{scripture.book[language.translator]}} {{scripture.chapter}}:{{scripture.startverse}}{{scripture.startverse === scripture.endverse ? "":"-" + scripture.endverse}}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">{{"close" | translate}}</button>
+  </div>
+</div>

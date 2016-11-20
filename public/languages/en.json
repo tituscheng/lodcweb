@@ -1,8 +1,11 @@
 {
+	"close": "close",
+	"testimony_baptism": "Testimony and Baptism",
 	"testimony": "Testimony",
 	"gallery": "Gallery",
 	"prayer_request": "Prayer request",
 	"upcoming_events": "Favorate Events",
+	"nav_special": "Testimony and Baptism",
 	"nav_sermon": "Sermon",
 	"nav_home": "Home",
 	"nav_news": "News",

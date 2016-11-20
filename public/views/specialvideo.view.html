@@ -1,0 +1,35 @@
+
+    <div class="clearfix"></div>
+    <!-- content begin -->
+    <div id="content" class="no-padding">
+<!-- subheader begin -->
+        <section id="subheader" data-speed="2" data-type="background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1>{{'nav_special' | translate}}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+        <div class="clearfix"></div>
+
+        <!-- content begin -->
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" align="center">
+                        <h3>{{video.title[language.translator]}}</h3>
+                       <iframe width="1000" height="300" src="{{video.media.videoURL}}"></iframe>
+                    </div>
+                </div>
+                <div class="row">
+                    <div align="center">
+                        <h4>{{video.scripture.book[language.translator]}} {{video.scripture.chapter}}:{{video.scripture.startverse=video.scripture.endverse ? video.scripture.startverse: video.scripture.startverse + '-' + video.scripture.endverse}}
+                    </div>
+                </div>
+            </div>
+        </div>

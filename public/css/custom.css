@@ -35,3 +35,39 @@
 .testimony-title {
 	font-size: 20px;
 }
+
+.special-video {
+	float: left;
+}
+
+.special-list {
+
+}
+
+.video-container {
+	text-align: center;
+}
+
+.video-title {
+	font-size: 20px;
+}
+
+.video-scripture-text {
+	font-size:20px;
+	text-align: center;
+}
+
+.next-button {
+	margin-top:15px;
+	width:100px;
+	height:100px;
+}
+
+.center {
+	text-align: center;
+}
+
+.special-title {
+	font-size: 29px;
+	margin-bottom: 29px;
+}

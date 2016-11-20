@@ -1,4 +1,4 @@
-var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSanitize', 'pascalprecht.translate', 'restangular', 'base64', 'uiGmapgoogle-maps', 'ocNgRepeat']);
+var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSanitize', 'pascalprecht.translate', 'restangular', 'base64', 'uiGmapgoogle-maps', 'ocNgRepeat', 'ui.bootstrap', "youtube-embed"]);
 
 lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvider, $urlRouterProvider) {
   var newBaseUrl = "http://default-environment.tdtddkdkmp.us-west-2.elasticbeanstalk.com/api/api";
@@ -37,6 +37,10 @@ lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvid
     url: "/sermon/video",
     templateUrl: "views/sermonvideo.view.html",
     controller: "SermonVideoController",
+  }).state("specialvideo", {
+    url: "/specialvideo",
+    templateUrl: "views/specialvideo.view.html",
+    controller: "SpecialVideoController"
   }).state('mission', {
     url: "/mission",
     templateUrl: "views/mission.view.html"
@@ -91,8 +95,11 @@ lodcWebApp.controller("MainSliderController", function($scope) {
 
 });
 
-lodcWebApp.controller("MainViewController", function($scope, $state) {
-
+lodcWebApp.controller("MainViewController", function($scope, $state, $rootScope, $state) {
+  $scope.selectSermon = function(video) {
+    $rootScope.selectedSermon = video;
+    $state.go("sermon");
+  }
 })
 
 lodcWebApp.controller("NewsController", function($scope, NewsService) {
