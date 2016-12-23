@@ -146,8 +146,6 @@ lodcWebApp.controller("ContactController", function($scope, $base64, $http, Emai
       }
     });
   }
-
-
 })
 
 // lodcWebApp.controller("SermonListController", function($scope, SermonService, $state) {
@@ -219,8 +217,8 @@ lodcWebApp.controller("EventsController", function($scope, EventService) {
     response.forEach(function(event) {
 
       //Handling time zone difference
-      var enddate = moment(event.enddate).add('hours', 7);
-      var startdate = moment(event.startdate).add('hours', 7);
+      var enddate = moment(event.enddate);
+      var startdate = moment(event.startdate);
       event.month = startdate.format("MMM");
       if(enddate.format("D") == startdate.format("D")) {
         event.day = startdate.format("DD");
