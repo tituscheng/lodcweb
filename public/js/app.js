@@ -2,7 +2,7 @@ var lodcWebApp = angular.module('lodcWebApp', ['ui.router', 'angularCSS', 'ngSan
 
 lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvider, $urlRouterProvider) {
   var newBaseUrl = "http://default-environment.tdtddkdkmp.us-west-2.elasticbeanstalk.com/api/api";
- // newBaseUrl = "http://localhost:3000/api/api";
+  //newBaseUrl = "http://localhost:3000/api/api";
   RestangularProvider.setBaseUrl(newBaseUrl);
 
   $translateProvider.preferredLanguage("en");
@@ -59,43 +59,36 @@ lodcWebApp.config(function($translateProvider, RestangularProvider, $stateProvid
 
 });
 
-lodcWebApp.controller("MainSliderController", function($scope) {
-  $scope.sliderContent = {
-    main1: {
-      title: {
-        en: "11/13 Sunday",
-        kr: "11/13 주일"
+lodcWebApp.controller("MainSliderController", function($scope, $rootScope, WebContentService) {
+  $scope.$on("webcontent-loaded", function(event, args){
+      $scope.sliderContent = {
+      main1: {
+        title: $rootScope.webcontent["index_mainslider_1"]["content"]["title"],
+        subtitle: $rootScope.webcontent["index_mainslider_1"]["content"]["subtitle"],
+        link: "events"
       },
-      subtitle: {
-        en: "Baptism and Communion",
-        kr: "세례와 성찬"
-      },
-      content: {
-        en: "Come and witness the baptism of our brothers and sister",
-        kr: "우리 형제들과 자매의 세례식에 증인으로 참여합시다"
-      },
-      link: "events"
-    },
-    main2: {
-      title: {
-        en: "1:00pm 11/25 Friday",
-        kr: "오후 1시 11/25 금요일"
-      },
-      subtitle: {
-        en: "Housewarming Service & Party",
-        kr: "이사 예배"
-      },
-      content: {
-        en: "",
-        kr: ""
-      },
-      link: "events"
-    }
-  };
-
+      main2: {
+        title: $rootScope.webcontent["index_mainslider_2"]["content"]["title"],
+        subtitle: $rootScope.webcontent["index_mainslider_2"]["content"]["subtitle"],
+        link: "events"
+      }
+    };
+  });
 });
 
-lodcWebApp.controller("MainViewController", function($scope, $state, $rootScope, $state) {
+lodcWebApp.controller("MainViewController", function($scope, $state, $rootScope, $state, WebContentService) {
+
+  $rootScope.webcontent = {}
+  WebContentService.GetContent(function(result){
+    for(var i = 0; i < result.length; i++) {
+      $rootScope.webcontent[result[i]["name"]] = {
+        id: result[i]["id"],
+        content: result[i]["content"]
+      }
+    }
+    $rootScope.$broadcast("webcontent-loaded");
+  });
+
   $scope.selectSermon = function(video) {
     $rootScope.selectedSermon = video;
     $state.go("sermon");
