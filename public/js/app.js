@@ -170,7 +170,7 @@ lodcWebApp.controller("ContactController", function($scope, $base64, $http, Emai
 
 lodcWebApp.controller("SermonVideoController", function($scope, SermonService, $sce, $state) {
   function embedlink(url) {
-    return url.replace("watch?v=", "embed/");
+    return url.replace("watch?v=", "embed/") +  "?rel=0";
   }
   var sermon = SermonService.getSermon();
   if(!_.isEmpty(sermon)) {
