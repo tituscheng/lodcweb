@@ -270,7 +270,7 @@ lodcWebApp.controller("AlbumController", function($scope, $state, $window, $root
 
       // Do not edit any of this unless you know what you're doing
       var containerWidth = angular.element(".gallery").width();
-      // console.log("Container width: " + containerWidth); 
+      // console.log("Container width: " + containerWidth);
       var ratioSumMax = containerWidth / widthSetting;
       var imgs = angular.element(".gallery").children();
       console.log(imgs);
@@ -330,7 +330,7 @@ lodcWebApp.controller("AlbumController", function($scope, $state, $window, $root
         count = 0;
         console.log("Finished Loading all images");
         scaleGallery();
-      } 
+      }
       // console.log("$scope.photos.length " + typeof $scope.photos.length);
       // console.log('Count image called with count ' + typeof count);
     }
@@ -425,11 +425,11 @@ lodcWebApp.controller("LatestEventController", function($scope, EventService) {
     $scope.latestevents = events;
   });
 
-  $scope.getDay = function(eventDay) {
+  var getDay = function(eventDay) {
     return eventDay.getDate();
   }
 
-  $scope.getMonth = function(eventDay) {
+  var getMonth = function(eventDay) {
     return eventDay.toLocaleString("en-us", {month: "long"});
   }
 
